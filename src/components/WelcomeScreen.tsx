@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { REPLAY_EVENT } from "./ReplayButton";
 
 type WelcomeScreenProps = {
   role: string;
@@ -149,6 +150,29 @@ export default function WelcomeScreen({
   useEffect(() => {
     const timer = setTimeout(() => setReady(true), 150);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Replay: ibalik ang envelope kapag may "replay-envelope" signal
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    function handleReplay() {
+      window.scrollTo({ top: 0, behavior: "auto" });
+
+      setOpening(false);
+      setReady(false);
+      setClosed(false);
+
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => setReady(true), 150);
+    }
+
+    window.addEventListener(REPLAY_EVENT, handleReplay);
+
+    return () => {
+      window.removeEventListener(REPLAY_EVENT, handleReplay);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {

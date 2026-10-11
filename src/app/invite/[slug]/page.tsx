@@ -3,6 +3,7 @@ import Link from "next/link";
 import Countdown from "../../../components/Countdown";
 import FloralDecor from "../../../components/FloralDecor";
 import InvitationExtras from "../../../components/InvitationExtras";
+import ReplayButton from "../../../components/ReplayButton";
 import WelcomeScreen from "../../../components/WelcomeScreen";
 
 export const instant = false;
@@ -47,6 +48,10 @@ const guests: Record<string, Guest> = {
   },
   "dionson-torino": {
     name: "Dionson Torino",
+    role: "Ninong",
+  },
+  "jun-laberinto": {
+    name: "Jun Laberinto",
     role: "Ninong",
   },
 };
@@ -337,13 +342,8 @@ export default async function InvitationPage({
             Kraricia & Bimbo
           </p>
 
-          {/* Navigation */}
-          <Link
-            href="/"
-            className="mt-10 text-xs uppercase tracking-[0.2em] text-[#6f8ba6] underline decoration-[#c9a54c] underline-offset-4 transition-colors hover:text-[#b8923a]"
-          >
-            Back to Welcome
-          </Link>
+          {/* Replay envelope */}
+          <ReplayButton />
         </div>
       </section>
     </main>
